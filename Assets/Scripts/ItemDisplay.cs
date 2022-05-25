@@ -10,9 +10,18 @@ public class ItemDisplay : MonoBehaviour
     public Text quantity;
 
     // Start is called before the first frame update
-    void Start()
+    private void OnValidate()
     {
-        image.sprite = item.Icon;
-        quantity.text = item.Quantity.ToString();
+        if (item == null)
+        {
+            image.enabled = false;
+            quantity.text = null;
+        }
+        else
+        {
+            image.sprite = item.Icon;
+            image.enabled = true;
+            quantity.text = item.Quantity.ToString();
+        }
     }
 }
