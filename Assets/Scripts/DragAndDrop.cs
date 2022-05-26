@@ -27,9 +27,6 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     public void OnDrag(PointerEventData eventData)
     {
         transform.position = Input.mousePosition;
-
-
-
     }
 
     public void OnEndDrag(PointerEventData eventData)

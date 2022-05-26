@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Inventory : MonoBehaviour
 {
@@ -12,6 +13,10 @@ public class Inventory : MonoBehaviour
         {
             slots = GetComponentsInChildren<DropHandler>();
         }
+    }
+    private void Update()
+    {
+        QuantityDisplay();
     }
 
     public Transform GetClosestSlot()
@@ -25,4 +30,23 @@ public class Inventory : MonoBehaviour
         }
         return null;
     } 
+
+    public void QuantityDisplay()
+    {
+        for (int i = 0; i < 6; i++)
+        {
+            if (slots[i].transform.childCount != 0)
+            {
+                slots[i].transform.GetChild(0).GetComponentInChildren<Text>().enabled = false;
+            } 
+        }
+
+        for (int i = 6; i < slots.Length; i++)
+        {
+            if(slots[i].transform.childCount != 0)
+            {
+                slots[i].transform.GetChild(0).GetComponentInChildren<Text>().enabled = true;
+            }
+        }
+    }
 }
