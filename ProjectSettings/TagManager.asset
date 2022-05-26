@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Slot
   - Item
+  - TempSlot
   layers:
   - Default
   - TransparentFX

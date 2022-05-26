@@ -8,22 +8,27 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     private CanvasGroup canvasGroup;
     private Inventory inventory;
     private Transform dragItemParent;
-    Vector2 previousPos;
+    private Transform temp;
 
     private void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
         inventory = FindObjectOfType<Inventory>();
+        temp = GameObject.FindGameObjectWithTag("TempSlot").transform;
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
         dragItemParent = eventData.pointerDrag.transform.parent;
-        previousPos = eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition;
+
+        transform.SetParent(temp);
+
     }
 
     public void OnDrag(PointerEventData eventData)
     {
         transform.position = Input.mousePosition;
+
+
 
     }
 
@@ -31,11 +36,11 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     {
         canvasGroup.alpha = 1f;
 
-        if (inventory.GetClosestSlot().childCount == 0)
+        if (inventory.GetClosestSlot().childCount == 0) // drag & drop
         {
             eventData.pointerDrag.transform.SetParent(inventory.GetClosestSlot());
         }
-        else
+        else // Swap item
         {
             eventData.pointerDrag.transform.SetParent(inventory.GetClosestSlot());
             inventory.GetClosestSlot().GetChild(0).transform.SetParent(dragItemParent);
@@ -48,7 +53,6 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
             }
         }
         eventData.pointerDrag.transform.localPosition = Vector3.zero;
-      
     }
 
     public void OnPointerDown(PointerEventData eventData)
