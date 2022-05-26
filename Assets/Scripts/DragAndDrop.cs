@@ -6,18 +6,19 @@ using UnityEngine.EventSystems;
 public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
 {
     private CanvasGroup canvasGroup;
-    private DropHandler dropHandler;
     private Inventory inventory;
+    private Transform dragItemParent;
+    Vector2 previousPos;
 
     private void Awake()
     {
         canvasGroup = GetComponent<CanvasGroup>();
-        dropHandler = FindObjectOfType<DropHandler>();
         inventory = FindObjectOfType<Inventory>();
     }
     public void OnBeginDrag(PointerEventData eventData)
     {
-
+        dragItemParent = eventData.pointerDrag.transform.parent;
+        previousPos = eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition;
     }
 
     public void OnDrag(PointerEventData eventData)
@@ -29,12 +30,30 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
     public void OnEndDrag(PointerEventData eventData)
     {
         canvasGroup.alpha = 1f;
-        eventData.pointerDrag.transform.SetParent(inventory.GetClosetSlot().transform);
-        eventData.pointerDrag.transform.position = inventory.GetClosetSlot().transform.position;
+
+        if (inventory.GetClosestSlot().childCount == 0)
+        {
+            eventData.pointerDrag.transform.SetParent(inventory.GetClosestSlot());
+        }
+        else
+        {
+            eventData.pointerDrag.transform.SetParent(inventory.GetClosestSlot());
+            inventory.GetClosestSlot().GetChild(0).transform.SetParent(dragItemParent);
+            for (int i = 0; i < inventory.slots.Length; i++)
+            {
+                if (inventory.slots[i].transform.childCount != 0)
+                {
+                    inventory.slots[i].transform.GetChild(0).localPosition = Vector3.zero;
+                }
+            }
+        }
+        eventData.pointerDrag.transform.localPosition = Vector3.zero;
+      
     }
 
     public void OnPointerDown(PointerEventData eventData)
     {
         canvasGroup.alpha = .6f;
     }
+
 }

@@ -14,13 +14,13 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public DropHandler GetClosetSlot()
+    public Transform GetClosestSlot()
     {
         for (int i = 0; i < slots.Length; i++)
         {
-            if (Vector2.Distance(slots[i].transform.position,Input.mousePosition) < 32)
+            if (Vector2.Distance(slots[i].transform.position,Input.mousePosition) < 35)
             {
-                return slots[i];
+                return slots[i].transform;
             } 
         }
         return null;
