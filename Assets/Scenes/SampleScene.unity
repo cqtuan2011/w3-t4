@@ -336,7 +336,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 67492170}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1585281036}
+        m_TargetAssemblyTypeName: Inventory, Assembly-CSharp
+        m_MethodName: RemoveItem
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &67492170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4050,6 +4062,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1522745097}
   m_CullTransparentMesh: 1
+--- !u!224 &1545775996 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 5833213474691317566, guid: f8caeeeb0b895104b9df2046a6f34668, type: 3}
+  m_PrefabInstance: {fileID: 1276015917352821114}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1551250931
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4240,6 +4257,7 @@ MonoBehaviour:
   - {fileID: 8307188859235808084, guid: 3c0e6ee473675f041a9464badf95af91, type: 3}
   - {fileID: 1437506469363466165, guid: e7f9f70f1f9f960489e3eb7144da3748, type: 3}
   tempSpawnPoint: {x: 0, y: 0, z: 0}
+  clickedObject: {fileID: 0}
 --- !u!1 &1600957686
 GameObject:
   m_ObjectHideFlags: 0
@@ -4356,11 +4374,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1658555644}
   m_CullTransparentMesh: 1
---- !u!224 &1674613023 stripped
-RectTransform:
-  m_CorrespondingSourceObject: {fileID: 5833213474691317566, guid: f8caeeeb0b895104b9df2046a6f34668, type: 3}
-  m_PrefabInstance: {fileID: 5833213473083878945}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1703797077
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4730,7 +4743,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1674613023}
+  - {fileID: 1545775996}
   m_Father: {fileID: 728909990}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -5496,7 +5509,7 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2144715362}
   m_CullTransparentMesh: 1
---- !u!1001 &5833213473083878945
+--- !u!1001 &1276015917352821114
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -5589,7 +5602,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5833213474691317567, guid: f8caeeeb0b895104b9df2046a6f34668, type: 3}
       propertyPath: m_Name
-      value: Item
+      value: Axe
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f8caeeeb0b895104b9df2046a6f34668, type: 3}

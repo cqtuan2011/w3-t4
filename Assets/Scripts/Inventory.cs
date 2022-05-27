@@ -2,12 +2,14 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.EventSystems;
 
 public class Inventory : MonoBehaviour
 {
     public DropHandler[] slots;
     public List<GameObject> prefabsToAdd = new List<GameObject>();
     public Vector3 tempSpawnPoint;
+    [HideInInspector] public GameObject clickedObject;
 
     private void OnValidate()
     {
@@ -16,6 +18,7 @@ public class Inventory : MonoBehaviour
             slots = GetComponentsInChildren<DropHandler>();
         }
     }
+
     private void Update()
     {
         QuantityDisplay();
@@ -67,5 +70,10 @@ public class Inventory : MonoBehaviour
                 return;
             }
         }
+    }
+
+    public void RemoveItem()
+    {
+        Destroy(clickedObject);
     }
 }
