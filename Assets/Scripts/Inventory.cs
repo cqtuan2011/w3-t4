@@ -6,6 +6,8 @@ using UnityEngine.UI;
 public class Inventory : MonoBehaviour
 {
     public DropHandler[] slots;
+    public List<GameObject> prefabsToAdd = new List<GameObject>();
+    public Vector3 tempSpawnPoint;
 
     private void OnValidate()
     {
@@ -46,6 +48,23 @@ public class Inventory : MonoBehaviour
             if(slots[i].transform.childCount != 0)
             {
                 slots[i].transform.GetChild(0).GetComponentInChildren<Text>().enabled = true;
+            }
+        }
+    }
+
+    public void AddItem()
+    {
+        int randomIndex = Random.Range(0, prefabsToAdd.Count);
+
+        for (int i = 6; i < slots.Length; i++)
+        {
+            if (slots[i].transform.childCount == 0)
+            {
+                GameObject spawnedPrefab = Instantiate(prefabsToAdd[randomIndex], tempSpawnPoint, Quaternion.identity);
+                spawnedPrefab.transform.SetParent(slots[i].transform);
+                spawnedPrefab.transform.localPosition = Vector3.zero;
+                spawnedPrefab.transform.localScale = Vector3.one;
+                return;
             }
         }
     }
