@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
 
-public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler
+public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, IEndDragHandler, IDragHandler, IPointerUpHandler
 {
     private CanvasGroup canvasGroup;
     private Inventory inventory;
     private Transform dragItemParent;
     private Transform temp;
+    public bool isSelected;
 
     private void Awake()
     {
@@ -57,4 +58,8 @@ public class DragAndDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler
         canvasGroup.alpha = .6f;
     }
 
+    public void OnPointerUp(PointerEventData eventData)
+    {
+        inventory.clickedObject = eventData.pointerPress;
+    }
 }
